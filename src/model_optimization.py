@@ -7,7 +7,10 @@ import math
 from data_load import Data_loading
 #import utils
 
-class model_mf_gcn(Data_loading):
+class model_optimization(Data_loading):
+    """
+    define decoding optimization model, for the use of all embedding methods
+    """
     def __init__(self):
         """
         Define parameters
