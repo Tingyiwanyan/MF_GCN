@@ -7,7 +7,7 @@ import math
 from data_load import Data_loading
 #import utils
 
-class model(Data_loading):
+class model_mf_gcn(Data_loading):
     def __init__(self):
         """
         Define parameters

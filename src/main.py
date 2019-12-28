@@ -4,4 +4,5 @@ from data_load import Data_loading
 
 if __name__ == "__main__":
 
-  utils = utils()
+  data = Data_loading(2)
+  #utils = utils()

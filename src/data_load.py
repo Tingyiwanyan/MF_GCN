@@ -5,7 +5,16 @@ import random
 import networkx as nx
 
 class Data_loading(object):
-    def __init__(self):
+    def __init__(self, data_set):
+        """
+        pick data set
+        """
+        if data_set == 1:
+            self.init_aminer()
+        if data_set == 2:
+            self.init_citceer()
+
+    def init_aminer(self):
         file = open("/home/tingyi/MF_GCN/data/full_team_members_year_c_0rmd.txt")
         file2 = open("/home/tingyi/MF_GCN/data/merged_DiversityData2_0rmd.txt")
         self.G = nx.DiGraph()
@@ -318,3 +327,23 @@ class Data_loading(object):
         self.std_prod = np.std([self.G.node[k]['productivity_diversity'] for k in self.G.nodes()])
         self.std_impact = np.std([self.G.node[k]['impact_diversity'] for k in self.G.nodes()])
         self.std_sci = np.std([self.G.node[k]['scientific_age_diversity'] for k in self.G.nodes()])
+
+    def init_citceer(self):
+        file = open("/home/tingyi/MF_GCN/database/citeseer/edges.txt")
+
+        self.G = nx.DiGraph()
+        index = 0
+        for line in file:
+            line = line.rstrip('\n')
+            a = np.int(np.array(line.split(' '))[0])
+            b = np.int(np.array(line.split(' '))[1])
+            if not self.G.has_node(a):
+                self.G.add_node(a, node_index=index)
+                index += 1
+            if not self.G.has_node(b):
+                self.G.add_node(b, node_index=index)
+                index += 1
+            self.G.add_edge(a, b)
+            self.G.add_edge(b, a)
+
+
